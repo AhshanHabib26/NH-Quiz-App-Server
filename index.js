@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const colors = require("colors");
 const dotenv = require("dotenv");
+const userHandler = require("./src/user/user.router");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -21,6 +22,10 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to the database".bgRed, err);
   });
+
+
+// API Call
+app.use("/api/v1/auth", userHandler)
 
 app.listen(PORT, () => {
   console.log(`NH Quiz Server is running on port ${PORT}`.bgMagenta);
